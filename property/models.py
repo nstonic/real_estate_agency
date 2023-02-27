@@ -25,6 +25,10 @@ class Flat(models.Model):
     address = models.TextField(
         'Адрес квартиры',
         help_text='ул. Подольских курсантов д.5 кв.4')
+    new_building = models.BooleanField(
+        'Новостройка',
+        null=True
+    )
     floor = models.CharField(
         'Этаж',
         max_length=3,
