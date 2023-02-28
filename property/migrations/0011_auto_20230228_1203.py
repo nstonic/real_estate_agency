@@ -6,7 +6,7 @@ from django.db import migrations
 def link_owner_to_flat(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     Owner = apps.get_model('property', 'Owner')
-    for flat in Flat.objects.all():
+    for flat in Flat.objects.all().iterator():
         Owner.objects.get(pure_phone=flat.owner_pure_phone).flats.add(flat)
 
 

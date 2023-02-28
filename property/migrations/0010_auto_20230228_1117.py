@@ -6,7 +6,7 @@ from django.db import migrations
 def create_owners(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     Owner = apps.get_model('property', 'Owner')
-    for flat in Flat.objects.all():
+    for flat in Flat.objects.all().iterator():
         Owner.objects.get_or_create(
             pure_phone=flat.owner_pure_phone,
             defaults={
