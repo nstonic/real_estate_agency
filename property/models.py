@@ -61,6 +61,11 @@ class Flat(models.Model):
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
 
+    class Meta:
+        verbose_name = 'Квартира'
+        verbose_name_plural = 'Квартиры'
+        ordering = ['-created_at']
+
 
 class Complaint(models.Model):
     user = models.ForeignKey(
@@ -77,6 +82,10 @@ class Complaint(models.Model):
     )
     text = models.TextField('Текст жалобы')
 
+    class Meta:
+        verbose_name = 'Жалоба'
+        verbose_name_plural = 'Жалобы'
+
 
 class Owner(models.Model):
     full_name = models.CharField('ФИО Владельца', max_length=200)
@@ -88,3 +97,10 @@ class Owner(models.Model):
         verbose_name='Квартиры в собственности',
         null=True
     )
+
+    class Meta:
+        verbose_name = 'Владелец'
+        verbose_name_plural = 'Владельцы'
+
+    def __str__(self):
+        return self.full_name
