@@ -7,7 +7,11 @@ def link_owner_to_flat(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     Owner = apps.get_model('property', 'Owner')
     for flat in Flat.objects.all().iterator():
-        Owner.objects.get(pure_phone=flat.owner_pure_phone).flats.add(flat)
+        Owner.objects.get_or_create(
+            full_name=flat.owner,
+            pure_phone=flat.owner_pure_phone,
+            defaults={'phonenumber': flat.owners_phonenumber}
+        )[0].flats.add(flat)
 
 
 class Migration(migrations.Migration):
